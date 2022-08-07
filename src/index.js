@@ -36,6 +36,15 @@ const { data } = Papa.parse(readFileSync(resolve(path), 'utf-8'));
 
 log.info(`Read ${data.length} rows`);
 
+for (const [action, rawValue] of data) {
+  const value = parseFloat(rawValue);
+
+  if (action === 'F' && value > 30) {
+    log.error(`Fire time ${value} exceeds limit!`);
+    process.exit(1);
+  }
+}
+
 log.info('Connecting to device...');
 const serialPort = new SerialPort({
   path: port,
