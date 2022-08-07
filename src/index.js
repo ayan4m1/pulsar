@@ -60,18 +60,22 @@ serialPort.on('open', async (err) => {
   log.info('Opened serial port!');
 
   for (const row of data) {
-    const [action, rawTime] = row;
-    const time = parseInt(rawTime, 10);
+    const [action, rawValue] = row;
+    const value = parseFloat(rawValue);
 
     switch (action) {
       case 'F':
-        log.info(`Firing for ${time} seconds...`);
-        serialPort.write(`F=${time}S\n`);
-        await delay(time * 1000);
+        log.info(`Firing for ${value} seconds...`);
+        serialPort.write(`F=${value}S\n`);
+        await delay(value * 1000);
         break;
       case 'P':
-        log.info(`Pausing for ${time} seconds...`);
-        await delay(time * 1000);
+        log.info(`Pausing for ${value} seconds...`);
+        await delay(value * 1000);
+        break;
+      case 'W':
+        log.info(`Setting wattage to ${value}...`);
+        serialPort.write(`P=${value}W\n`);
         break;
     }
   }
