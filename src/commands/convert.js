@@ -51,11 +51,10 @@ export default function (input, output) {
       lastTime = time;
     } else if (lastCurrent && !current) {
       const startTime = time - lastEndTime;
+      const duration = time - lastTime;
 
-      commands.push(
-        `P,${Math.round((startTime - (time - lastTime)) * 1000) / 1000}`
-      );
-      commands.push(`F,${Math.round((time - lastTime) * 1000) / 1000}`);
+      commands.push(`P,${Math.round((startTime - duration) * 1000) / 1000}`);
+      commands.push(`F,${Math.round(duration * 1000) / 1000}`);
 
       lastEndTime = time;
     }
