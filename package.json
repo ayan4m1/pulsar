@@ -1,7 +1,7 @@
 {
   "name": "@ayan4m1/pulsar",
   "version": "0.1.0",
-  "description": "",
+  "description": "Record and play back sessions on a DNA device.",
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "license": "MIT",
   "type": "module",
