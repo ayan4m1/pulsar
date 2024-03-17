@@ -8,15 +8,19 @@
   "bin": {
     "pulsar": "src/index.js"
   },
+  "files": [
+    "src/"
+  ],
   "scripts": {
     "start": "node src/index.js",
+    "lint": "eslint src/**/*.js",
     "prepare": "husky"
   },
   "dependencies": {
-    "commander": "^9.5.0",
+    "commander": "^12.0.0",
     "dotenv": "^16.4.5",
     "papaparse": "^5.4.1",
-    "serialport": "^10.5.0",
+    "serialport": "^12.0.0",
     "winston": "^3.12.0"
   },
   "devDependencies": {
