@@ -6,6 +6,8 @@ This is software to run scripted firing sequences on an Evolv DNA device.
 
 ## Installation
 
+Install the current [Node.js LTS version](https://nodejs.org/en).
+
 > npm i -g @ayan4m1/pulsar
 
 ## Usage
