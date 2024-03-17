@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander';
 
 import convert from './commands/convert.js';
@@ -11,7 +13,10 @@ program
   .command('run')
   .description('Run a script')
   .argument('<path>', 'CSV script')
-  .requiredOption('-p, --port <value>', 'Serial port')
+  .requiredOption(
+    '-p, --port <value>',
+    'Serial port (e.g. "COM3" or /dev/ttyUSB0)'
+  )
   .action(run);
 
 program
