@@ -1,6 +1,7 @@
-import { readFileSync } from 'fs';
 import Papa from 'papaparse';
 import { resolve } from 'path';
+import { program } from 'commander';
+import { readFile } from 'fs/promises';
 import { SerialPort } from 'serialport';
 
 import { getLogger } from '../modules/logging.js';
@@ -12,14 +13,28 @@ const delay = (ms) =>
     setTimeout(resolve, ms);
   });
 
-export default function (path, { port }) {
+program
+  .argument('<path>', 'CSV script')
+  .requiredOption(
+    '-p, --port <value>',
+    'Serial port (e.g. "COM3" or /dev/ttyUSB0)'
+  )
+  .parse();
+
+try {
+  const [path] = program.args;
+  const { port } = program.opts();
+
   if (!path) {
     log.error('Required argument missing!');
     process.exit(1);
   }
 
-  log.info('Reading script...');
-  const { data } = Papa.parse(readFileSync(resolve(path), 'utf-8'));
+  log.info('Reading puff data...');
+  const { data } = Papa.parse(await readFile(resolve(path), 'utf-8'), {
+    comments: '#',
+    skipEmptyLines: true
+  });
 
   log.info(`Read ${data.length} rows`);
 
@@ -46,8 +61,7 @@ export default function (path, { port }) {
 
     log.info('Opened serial port!');
 
-    for (const row of data) {
-      const [action, rawValue] = row;
+    for (const [action, rawValue] of data) {
       const value = parseFloat(rawValue);
 
       switch (action) {
@@ -70,4 +84,7 @@ export default function (path, { port }) {
     log.info('Finished script!');
     serialPort.close();
   });
+} catch (error) {
+  console.error(error);
+  process.exit(1);
 }

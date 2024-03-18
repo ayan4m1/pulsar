@@ -1,29 +1,41 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
+import { program } from 'commander';
+import { fileURLToPath } from 'url';
+import { readFile } from 'fs/promises';
+import { dirname, resolve } from 'path';
 
-import convert from './commands/convert.js';
-import run from './commands/run.js';
+try {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const commandDir = resolve(__dirname, 'commands');
+  const packageJsonPath = resolve(__dirname, '..', 'package.json');
+  const { description, version } = JSON.parse(
+    await readFile(packageJsonPath, 'utf-8')
+  );
 
-const program = new Command();
-
-program.name('pulsar').version('0.1.0').description('Scripted DNA control');
-
-program
-  .command('run')
-  .description('Run a script')
-  .argument('<path>', 'CSV script')
-  .requiredOption(
-    '-p, --port <value>',
-    'Serial port (e.g. "COM3" or /dev/ttyUSB0)'
-  )
-  .action(run);
-
-program
-  .command('convert')
-  .description('Converts an EScribe CSV to a script')
-  .argument('<input>', 'Input CSV from EScribe')
-  .argument('<output>', 'Output script')
-  .action(convert);
-
-program.parse();
+  program
+    .name('pulsar')
+    .version(version)
+    .description(description)
+    .executableDir(commandDir)
+    .command('run', 'Play back a .puff file', {
+      executableFile: 'run.js'
+    })
+    .command(
+      'convert',
+      'Convert an EScribe recorded puff .csv to a .puff file',
+      {
+        executableFile: 'convert.js'
+      }
+    )
+    .command('validate', 'Validate a .puff file', {
+      executableFile: 'validate.js'
+    })
+    .command('visualize', 'Produce an ASCII bar chart of a .puff file', {
+      executableFile: 'visualize.js'
+    })
+    .parseAsync();
+} catch (error) {
+  console.error(error);
+  process.exit(1);
+}
