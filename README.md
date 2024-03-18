@@ -14,4 +14,28 @@ Install the current [Node.js LTS version](https://nodejs.org/en).
 
 > pulsar --help
 
-TODO: Document CSV format, provide true usage examples.
+**TODO**: Proper usage examples!
+
+## Puff Files
+
+A .puff file is a CSV file like this:
+
+```csv
+# Lines starting with a hash are comments and are ignored
+# The next line sets wattage to 10 watts
+W,10
+# The next line fires for 5 seconds
+F,5
+# The next line waits for 7 seconds
+P,7
+# Now a simple "wattage curve" for demonstration
+W,30
+F,3
+P,1
+W,50
+F,3
+P,2
+W,40
+F,3
+P,5
+```
