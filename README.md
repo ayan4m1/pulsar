@@ -1,5 +1,7 @@
 # Pulsar
 
+[![npm version](https://badge.fury.io/js/@ayan4m1%2Fpulsar.svg)](https://badge.fury.io/js/@ayan4m1%2Fpulsar)
+
 This is software to run scripted firing sequences on an Evolv DNA device.
 
 **NOTE**: Because this device can fire a vaporizer, it can start an actual fire if used improperly. Please read the liability disclaimer in `LICENSE` before using this software.
