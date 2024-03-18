@@ -1,6 +1,5 @@
 {
   "name": "@ayan4m1/pulsar",
-  "private": false,
   "version": "0.1.0",
   "description": "Record and play back sessions on a DNA device.",
   "author": "ayan4m1 <andrew@bulletlogic.com>",
@@ -18,8 +17,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "chartscii": "^1.3.2",
     "commander": "^12.0.0",
-    "dotenv": "^16.4.5",
     "papaparse": "^5.4.1",
     "serialport": "^12.0.0",
     "winston": "^3.12.0"
