@@ -1,28 +1,22 @@
-import Papa from 'papaparse';
 import { existsSync } from 'fs';
 import Chartscii from 'chartscii';
 import { program } from 'commander';
 
-import { getLogger } from '../modules/logging.js';
-import { readFile } from 'fs/promises';
+import { parseCsv, getLogger } from '../utils/index.js';
 
 const log = getLogger('visualize');
 
 program.argument('<input>', '.puff file to visualize').parse();
 
 try {
-  const [inputPath] = program.args;
+  const [path] = program.args;
 
-  if (!existsSync(inputPath)) {
-    throw new Error(`${inputPath} does not exist!`);
+  if (!existsSync(path)) {
+    throw new Error(`${path} does not exist!`);
   }
 
-  log.info(`Opening ${inputPath}...`);
-
-  const { data } = Papa.parse(await readFile(inputPath, 'utf-8'), {
-    comments: '#',
-    skipEmptyLines: true
-  });
+  log.info(`Reading CSV...`);
+  const data = await parseCsv(path);
 
   let currentTime = 0;
   const graphData = [];

@@ -1,9 +1,7 @@
-import Papa from 'papaparse';
-import { resolve } from 'path';
 import { program } from 'commander';
-import { readFile, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 
-import { getLogger } from '../modules/logging.js';
+import { parseCsv, getLogger } from '../utils/index.js';
 
 const log = getLogger('convert');
 
@@ -27,10 +25,7 @@ try {
   }
 
   log.info('Reading CSV...');
-  const { data } = Papa.parse(await readFile(resolve(input), 'utf-8'), {
-    header: true,
-    skipEmptyLines: true
-  });
+  const data = await parseCsv(input, true);
 
   log.info(`Read ${data.length} rows`);
 

@@ -1,20 +1,12 @@
-import Papa from 'papaparse';
-import { resolve } from 'path';
 import { program } from 'commander';
-import { readFile } from 'fs/promises';
 import { SerialPort } from 'serialport';
 
-import { getLogger } from '../modules/logging.js';
+import { delay, parseCsv, getLogger } from '../utils/index.js';
 
 const log = getLogger('run');
 
-const delay = (ms) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-
 program
-  .argument('<path>', 'CSV script')
+  .argument('<input>', '.puff file to execute')
   .requiredOption(
     '-p, --port <value>',
     'Serial port (e.g. "COM3" or /dev/ttyUSB0)'
@@ -30,11 +22,8 @@ try {
     process.exit(1);
   }
 
-  log.info('Reading puff data...');
-  const { data } = Papa.parse(await readFile(resolve(path), 'utf-8'), {
-    comments: '#',
-    skipEmptyLines: true
-  });
+  log.info('Reading CSV...');
+  const data = await parseCsv(path);
 
   log.info(`Read ${data.length} rows`);
 
