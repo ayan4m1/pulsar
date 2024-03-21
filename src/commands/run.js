@@ -26,16 +26,6 @@ try {
   const data = await parseCsv(path);
 
   log.info(`Read ${data.length} rows`);
-
-  for (const [action, rawValue] of data) {
-    const value = parseFloat(rawValue);
-
-    if (action === 'F' && value > 30) {
-      log.error(`Fire time ${value} exceeds limit!`);
-      process.exit(1);
-    }
-  }
-
   log.info('Connecting to device...');
   const serialPort = new SerialPort({
     path: port,
@@ -48,7 +38,7 @@ try {
       return;
     }
 
-    log.info('Opened serial port!');
+    log.info('Connected to device!');
 
     for (const [action, rawValue] of data) {
       const value = parseFloat(rawValue);
@@ -64,7 +54,7 @@ try {
           await delay(value * 1000);
           break;
         case 'W':
-          log.info(`Setting wattage to ${value}...`);
+          log.info(`Setting wattage to ${value}W...`);
           serialPort.write(`P=${value}W\n`);
           break;
       }
