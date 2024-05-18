@@ -9,9 +9,10 @@ try {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const commandDir = resolve(__dirname, 'commands');
   const packageJsonPath = resolve(__dirname, '..', 'package.json');
-  const { name, description, version } = JSON.parse(
+  const { bin, description, version } = JSON.parse(
     await readFile(packageJsonPath, 'utf-8')
   );
+  const [name] = Object.keys(bin);
 
   program
     .name(name)
