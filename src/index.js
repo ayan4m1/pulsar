@@ -9,12 +9,12 @@ try {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const commandDir = resolve(__dirname, 'commands');
   const packageJsonPath = resolve(__dirname, '..', 'package.json');
-  const { description, version } = JSON.parse(
+  const { name, description, version } = JSON.parse(
     await readFile(packageJsonPath, 'utf-8')
   );
 
   program
-    .name('pulsar')
+    .name(name)
     .version(version)
     .description(description)
     .executableDir(commandDir)
