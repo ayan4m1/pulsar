@@ -34,9 +34,30 @@ try {
     }
   }
 
-  const chart = new Chartscii(graphData, { color: 'green', reverse: true });
+  graphData.push({ label: `${currentTime + 1}s`, value: 0 });
 
+  const maxWidth = 120;
+  const chartWidth = Math.min(maxWidth, Math.max(0, currentTime + 1));
+  const barSize = Math.ceil(chartWidth / 6);
+
+  const chart = new Chartscii(graphData, {
+    fill: '░',
+    padding: 0,
+    naked: true,
+    color: 'green',
+    theme: 'pastel',
+    barSize: barSize,
+    width: chartWidth,
+    orientation: 'vertical'
+  });
+
+  const borderString = Array(chartWidth - 1)
+    .fill('━')
+    .join('');
+
+  console.log(borderString);
   console.log(chart.create());
+  console.log(borderString);
 } catch (error) {
   console.error(error);
   process.exit(1);
