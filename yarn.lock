@@ -26,7 +26,7 @@ __metadata:
     serialport: "npm:13.0.0"
     winston: "npm:3.19.0"
   bin:
-    pulsar: src/index.js
+    pulsar: ./src/index.js
   languageName: unknown
   linkType: soft
 
