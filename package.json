@@ -5,7 +5,9 @@
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "license": "MIT",
   "type": "module",
-  "bin": "src/index.js",
+  "bin": {
+    "pulsar": "./src/index.js"
+  },
   "repository": {
     "url": "https://github.com/ayan4m1/pulsar"
   },
