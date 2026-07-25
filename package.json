@@ -6,6 +6,9 @@
   "license": "MIT",
   "type": "module",
   "bin": "src/index.js",
+  "repository": {
+    "url": "https://github.com/ayan4m1/pulsar"
+  },
   "files": [
     "src/"
   ],
