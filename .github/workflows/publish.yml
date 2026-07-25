@@ -2,6 +2,9 @@ name: Deploy releases to NPM
 on:
   push:
     tags: ['v*']
+permissions:
+  id-token: write
+  contents: read
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,5 +17,3 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
