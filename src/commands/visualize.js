@@ -1,5 +1,5 @@
 import { existsSync } from 'fs';
-import Chartscii from 'chartscii';
+import { Chartscii } from 'chartscii';
 import { program } from 'commander';
 
 import { parseCsv, getLogger } from '../utils/index.js';

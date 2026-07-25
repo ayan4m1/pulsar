@@ -5,9 +5,7 @@
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "license": "MIT",
   "type": "module",
-  "bin": {
-    "pulsar": "src/index.js"
-  },
+  "bin": "src/index.js",
   "files": [
     "src/"
   ],
@@ -17,21 +15,24 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "chartscii": "3.2.0",
-    "commander": "13.1.0",
-    "papaparse": "5.5.2",
+    "chartscii": "4.0.3",
+    "commander": "15.0.0",
+    "papaparse": "5.5.4",
     "serialport": "13.0.0",
-    "winston": "3.17.0"
+    "winston": "3.19.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.27.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-import-resolver-node": "^0.3.9",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.5",
+    "@babel/eslint-parser": "^8.0.1",
+    "@eslint/js": "^10.0.1",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-node": "^0.4.0",
+    "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.7.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
-    "prettier": "^3.5.3"
-  }
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.9.6"
+  },
+  "packageManager": "yarn@4.17.1"
 }
